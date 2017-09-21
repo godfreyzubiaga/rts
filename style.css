@@ -1,0 +1,81 @@
+body {
+  margin: 0px;
+  background-color: #1a82f7;
+  top: 0;
+  left: 0;
+  position: fixed;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+#title {
+  font-size: 130px;
+  text-shadow: 10px 5px 10px black;
+  color: white;
+  text-align: center;
+  margin-top: 15vh;
+}
+
+#gameOver {
+  font-size: 50px;
+  text-shadow: 10px 5px 10px black;
+  color: red;
+  text-align: center;
+  margin-top: 13vh;
+}
+
+#subtitle {
+  font-size: 50px;
+  text-shadow: 10px 5px 10px black;
+  color: white;
+  text-align: center;
+  margin-top: 15vh;
+}
+
+#help {
+  font-size: 30px;
+  text-shadow: 10px 5px 10px black;
+  color: white;
+  text-align: center;
+  margin-top: 15vh;
+}
+
+.rules {
+  margin-top: 5vh;
+  margin-left: 15vw;
+  height: 50vh;
+  width: 30vw;
+}
+
+#text1 {
+  padding: 1vw;
+  font-size: 20px;
+  color: white;
+  text-align: left;
+}
+
+#text2 {
+  margin: auto;
+  margin-top: 5%;
+  font-size: 30px;
+  color: white;
+  text-align: center;
+}
+
+@-webkit-keyframes moveit {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+#subtitle, #help {
+  -webkit-animation-duration: 1s;
+  -webkit-animation-name: moveit;
+  -webkit-animation-timing-function: linear;
+  -webkit-animation-iteration-count: infinite;
+}

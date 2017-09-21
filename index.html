@@ -1,124 +1,27 @@
-<!DOCTYPE html>
+<!DOCTYPE>
 <html>
-
-<head>
-  <title>Tower Stacking</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <style>
-    body {
-      margin: 0px;
-      background-color: #1a82f7;
-      top: 0;
-      left: 0;
-      position: fixed;
-      font-family: Georgia, 'Times New Roman', Times, serif;
-    }
-
-    #title {
-      font-size: 130px;
-      text-shadow: 10px 5px 10px black;
-      color: white;
-      text-align: center;
-      margin-top: 15vh;
-    }
-
-    #subtitle {
-      font-size: 50px;
-      text-shadow: 10px 5px 10px black;
-      color: white;
-      text-align: center;
-      margin-top: 15vh;
-    }
-
-    @-webkit-keyframes moveit {
-      0% {
-        opacity: 1;
-      }
-      50% {
-        opacity: 0;
-      }
-      100% {
-        opacity: 1;
-      }
-    }
-
-    #subtitle {
-      -webkit-animation-duration: 1s;
-      -webkit-animation-name: moveit;
-      -webkit-animation-timing-function: linear;
-      -webkit-animation-iteration-count: infinite;
-    }
-  </style>
-  <script>
-    let activeRect = {};
-    let rects = [];
-    let rectWidth;
-    const rectHeight = 20;
-    let originalY = -rectHeight;
-    let gameStart = false;
-    let spaceHit = false;
-    window.onload = function () {
-      const c = document.getElementById('canvas');
-      c.width = window.innerWidth;
-      c.height = window.innerHeight;
-      rectWidth = window.innerWidth / 3;
-      document.body.onkeyup = function (e) {
-        if (e.keyCode == 32) {
-          document.getElementById('content').style.display = 'none';
-          createRect();
-          setInterval(moveRect, 0.001);
-          // spaceHit = false;
-        } else if (e.keyCode == 65) {
-          for (var i = 0; i < rects.length; i++) {
-            console.log(rects[i].x + '------------------');
-          }
-        }
-      }
-    }
-
-    function moveRect() {
-      const c = document.getElementById("canvas");
-      const ctx = c.getContext("2d");
-      ctx.fillStyle = activeRect.color;
-      ctx.clearRect(0, originalY, c.width, rectHeight);
-      ctx.fillRect(activeRect.x, activeRect.y, activeRect.width, activeRect.height);
-      spaceHit = false;
-      activeRect.x += activeRect.speedx;
-      if (activeRect.x <= 0 || activeRect.x + rectWidth >= c.width) {
-        activeRect.speedx = -activeRect.speedx;
-      }
-    }
-
-    function createRect() {
-      const posX = Math.trunc(Math.random() * rectWidth);
-      let posY = originalY += rectHeight;
-      activeRect.x = 5;
-      activeRect.y = posY;
-      activeRect.speedx = 1;
-      activeRect.height = rectHeight;
-      activeRect.width = rectWidth;
-      const colorArray = ['rgb(244, 67, 54)', 'pink', 'purple', 'blue', 'deeppink', 'idigo', 'lightblue', 'cyan',
-        'teal', 'lightgreen', 'lime', '#00E676', '#FFC107', '#E65100', '#546E7A'
-      ];
-      activeRect.color = colorArray[Math.trunc(Math.random() * colorArray.length)];
-      rects.push(activeRect);
-    }
-  </script>
-</head>
-
-<body>
-  <!--<audio autoplay loop>
-    <source src="background.mp3">
-  </audio>-->
-  <div id="content">
-    <div id="title">
-      Reverse Tower Stacking
+  <head>
+    <title>Tower Stacking</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <script src="script.js"></script>
+  </head>
+  <body>
+    <audio autoplay loop>
+      <source src="sounds/background.mp3">
+    </audio>
+    <div id="content">
+      <div id="title">
+        Reverse Tower Stacking
+      </div>
+      <div id="subtitle">
+        Press "Enter" to start the game.
+      </div>
+      <div id="help">
+        Press "H" to see the Rules and Mechanics of the Game.
+      </div>
     </div>
-    <div id="subtitle">
-      Press "Space" to start the game.
-    </div>
-  </div>
-  <canvas id="canvas"></canvas>
-</body>
-
+    <canvas id="canvas"></canvas>
+  </body>
 </html>
