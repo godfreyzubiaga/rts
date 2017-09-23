@@ -7,15 +7,14 @@ let movingRect = {};
 let origRect = {};
 let speedX;
 let interval;
-let atHelpPage = false;
 let score = 0;
 let highScore = 0;
 window.onload = function () {
   const c = document.getElementById('canvas');
   c.width = window.innerWidth;
   c.height = window.innerHeight;
-  document.body.onkeyup = function (e) {
-    if (e.keyCode == 13 && !gameStart && !atHelpPage) {
+  document.body.onclick = function (e) {
+    if (!gameStart) {
       document.body.style.background = 'black';
       c.width = window.innerWidth;
       c.height = window.innerHeight;
@@ -27,31 +26,12 @@ window.onload = function () {
       interval = setInterval(showMovingRect, 1);
       atHelpPage = false;
       showScore();
-    } else if (gameStart && e.keyCode == 32) {
+    } else if (gameStart) {
       drawCurrentRect(movingRect);
       clearInterval(interval);
       createMovingRect();
       interval = setInterval(showMovingRect, 1);
       showScore();
-    } else if (e.keyCode == 72 && !gameStart) {
-      atHelpPage = true;
-      document.getElementById('content').innerHTML =
-        `<div id="text1">Press 'Escape' key to go back to Main Menu.</div>
-          <img class="rules" src="images/rule1.png"/>
-          <img class="rules" src="images/rule2.png"/>
-          <div class="rules" id="text2">Press Space to 'stack' rectangle closest to the previous rectangle.</div>`;
-    } else if (e.keyCode == 27 && atHelpPage) {
-      document.getElementById('content').innerHTML =
-        `<div id="title">
-          Reverse Tower Stacking
-        </div>
-        <div id="subtitle">
-          Press "Enter" to start the game.
-        </div>
-        <div id="help">
-          Press "H" to see the Rules and Mechanics of the Game.
-        </div>`;
-      atHelpPage = false;
     }
   }
 }
@@ -59,9 +39,9 @@ window.onload = function () {
 function createOrigRect() {
   const c = document.getElementById('canvas');
   const ctx = c.getContext("2d");
-  origRect.x = Math.floor(window.innerWidth / 3);
+  origRect.x = Math.floor(window.innerWidth / 4);
   origRect.y = 0;
-  origRect.width = Math.floor(window.innerWidth / 3);
+  origRect.width = Math.floor(window.innerWidth / 2);
   origRect.height = rectHeight;
   origRect.color = getRandomColor();
   ctx.fillStyle = origRect.color;
@@ -84,15 +64,7 @@ function showMovingRect() {
 }
 
 function createMovingRect() {
-  if (rects.length <= 5) {
-    speedX = 4;
-  } else if (rects.length <= 10) {
-    speedX = 3;
-  } else if (rects.length <= 15) {
-    speedX = 2;
-  } else {
-    speedX = 1.5;
-  }
+  speedX = 1;
   movingRect.x = 0;
   movingRect.y = rects.length * 20;
   movingRect.width = rects[rects.length - 1].width;
@@ -138,7 +110,7 @@ function gameOver() {
       Game Over. Try again!
     </div>
     <div id="subtitle">
-      Press "Enter" to Restart the game.
+      Tap to Restart the game.
     </div>`;
   c.height = 0;
   gameStart = false;
